@@ -1,20 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
+import Searchresult from './components/Searchresult.js';
+import Header from './components/Header.js';
 import './App.css';
-
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        > 
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Searchresult/>
     </div>
   );
 }

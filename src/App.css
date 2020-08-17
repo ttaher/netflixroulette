@@ -1,7 +1,11 @@
 .App {
   text-align: center;
 }
-
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+background-color: #232323;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +39,7 @@
   to {
     transform: rotate(360deg);
   }
+}
+nav.ba {
+  list-style-type: none;
 }

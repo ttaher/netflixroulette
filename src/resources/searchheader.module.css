@@ -1,0 +1,30 @@
+.searchHeader {
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.searchContainer {
+    float: left;
+    margin-top: 150px;
+}
+.searchTitle {
+    color: white;
+    float: left;
+    margin-top: 150px;
+}
+.searchInput {
+    background-color: #424242;
+    color: #ffffff;
+    float: left;
+    height: 45px;
+    width: 400px;
+}
+
+.searchButton {
+    background-color: #F56261;
+    color: #ffffff;
+    float: left;
+    height: 45px;
+    font-weight: bold;
+    width: 111px;
+}

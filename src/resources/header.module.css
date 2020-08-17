@@ -1,0 +1,25 @@
+.header {
+    height: 350px;
+    margin: 10px;
+    background-image :  url('header_alpha_website_small.jpg');
+    opacity: 0.85;
+}
+.headerTitle {
+    padding-top: 10px;
+    padding-left: 30px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    float: left;
+    color: #f65261;
+}
+
+.headerAddMovie {
+    margin-top: 10px;
+    margin-right: 10px;
+    float: right;
+    color: #f65261;
+    background-color: #555555;
+    width: 150px;
+    height: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+}
