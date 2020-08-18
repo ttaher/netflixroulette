@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../resources/header.module.css';
 import SearchHeader from './SearchHeader';
 import '../resources/header.module.css';
+import ErrorBoundary from './ErrorBoundary'
 class Header extends React.Component {
     render() {
         return (
@@ -11,12 +12,14 @@ class Header extends React.Component {
                         <label className={styles.headerTitle}>
                             NETFLIXROULETTE
                         </label>
-                        <button type="button" className= {styles.headerAddMovie}>
+                        <button type="button" className={styles.headerAddMovie}>
                             + ADD MOVIE
                             </button>
                     </div>
                     <div className="row">
-                        <SearchHeader></SearchHeader>
+                        <ErrorBoundary>
+                            <SearchHeader></SearchHeader>
+                        </ErrorBoundary>
                     </div>
                 </div>
 
