@@ -1,61 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from "react-dom";
+import { connect } from 'react-redux';
 import '../resources/header.module.css';
-import '../resources/searchresult.module.css';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import MovieControl from './MovieControl.js'
-class MovieTemplate extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            movieControlMenu: false
-        };
-
-        this.showControlMenu = this.showControlMenu.bind(this);
-    }
-    showControlMenu() {
-        console.log("test showControlMenu ")
-        this.setState({
-            movieControlMenu: !this.state.movieControlMenu
-        });
-        console.log(this.state.movieControlMenu)
-
-    }
-    render() {
-        return (
-            <>
-                <div id={this.props.movie.id} className="col-4">
-                    <div class="b5fwa0m2 pmk7jnqg plgsh5y4 edit-content">
-                        <button onClick={this.showControlMenu.bind(this)} >...</button>
-                        {
-                            this.state.movieControlMenu ?
-                                <MovieControl className="row"
-                                    text='Close Me'
-                                    closemenu={this.showControlMenu.bind(this)}
-                                    movie={this.props.movie}
-                                />
-                                : null
-                        }
-                    </div>
-                    <a href="/">
-                        <div className="row">
-                            <div  >
-                                <img className="col" src={this.props.movie.movieImgUrl} alt="" />
-                                <div className="float-left">
-                                    {this.props.movie.movieName}
-                                </div>
-                                <div className="float-right">
-                                    {this.props.movie.movieYear}
-
-                                </div>
-                            </div>
+import MovieControl from './MovieControl';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { editSelectedMovie, deleteSelectedMovie, loadMovieDetail } from '../pages/thunks';
+const MovieTemplate = ({ movie, editMoviePressed, deleteMoviePressed, onMovieClicked }) => {
+    const [movieControlMenu, setmovieControlMenu] = useState(false);
+    return (
+        <a id={movie.id} className="col-4" onClick={() => onMovieClicked(movie)} >
+            <div className="b5fwa0m2 pmk7jnqg plgsh5y4 edit-content">
+                <button onClick={() => setmovieControlMenu(!movieControlMenu)} >...</button>
+                {
+                    movieControlMenu ?
+                        <div >
+                            <button onClick={() => setmovieControlMenu(!movieControlMenu)}>close me</button>
+                            <button onClick={() => editMoviePressed(movie)}>Edit</button>
+                            <button onClick={() => {
+                                const confirmMessage = `Are you sure you want to delete this movie?  ${movie.movieName}`;
+                                confirmAlert({
+                                    title: 'Delete MOVIE',
+                                    message: confirmMessage,
+                                    buttons: [
+                                        {
+                                            label: 'Confirm',
+                                            onClick: () =>
+                                                deleteMoviePressed(movie)
+                                        }
+                                    ]
+                                })
+                            }}>Delete</button>
                         </div>
-                    </a>
+                        : null
+                }
+            </div>
+            <div>
+                <div className="row">
+                    <div  >
+                        <img className="col" src={movie.movieImgUrl} alt="" />
+                        <div className="float-left">
+                            {movie.movieName}
+                        </div>
+                        <div className="float-right">
+                            {movie.movieYear}
+                        </div>
+                    </div>
                 </div>
-            </>
-        );
-    }
-
+            </div>
+        </a >
+    )
 }
-export default MovieTemplate;
+
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+    editMoviePressed: movie => dispatch(editSelectedMovie(movie)),
+    deleteMoviePressed: movie => dispatch(deleteSelectedMovie(movie)),
+    onMovieClicked: movie => dispatch(loadMovieDetail(movie))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieTemplate);

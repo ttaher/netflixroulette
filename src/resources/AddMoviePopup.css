@@ -28,9 +28,9 @@ h1 {
     bottom: 25%;
     margin: auto;
     background: #424242;
-    width: 100%;
-    height: 100%;
-  }
+    width: 700px;
+    height: 600px;
+    overflow: scroll; }
   .form-input-title{
     font-family: bold;
     color: #f65261;

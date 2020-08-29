@@ -1,11 +1,23 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { Provider } from 'react-redux';
+import { configureStore } from './store';
+import App from './App.js';
+import HomePage from './pages/HomePage';
 import './resources/index.css';
-import HomePage from './pages/HomePage.js';
+const store = configureStore();
+const persistor = persistStore(store);
 
-render(
-  <React.StrictMode>
-    <HomePage />
-  </React.StrictMode>,
-  document.getElementById("root")
-)
+ReactDOM.render(
+    <Provider store={store}>
+        <PersistGate
+            loading={<div>Loading...</div>}
+            persistor={persistor}>
+            <HomePage />
+        </PersistGate>
+    </Provider>
+    ,
+    document.getElementById('root'),
+);

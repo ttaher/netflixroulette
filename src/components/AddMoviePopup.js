@@ -3,7 +3,6 @@ import '../resources/AddMoviePopup.css';
 class AddMoviePopup extends React.Component {
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             title: "",
             releaseDate: null,

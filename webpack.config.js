@@ -1,40 +1,40 @@
-const path = require("path");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist")
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        port: 3000
-    },
+    entry: './src/index.js',
+    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
+                loader: 'babel-loader',
+                options: { presets: ["@babel/env"] }
             },
             {
                 test: /\.css$/,
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' }
-                ]
+                use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(jpe?g|gif|png|svg)$/i,
                 use: [
-                    { loader: 'url-loader' }
-                ]
+                    'file-loader',
+              ]
             }
         ]
-    }
-}
+    },
+    resolve: { extensions: ['*', '.js', '.jsx'] },
+    output: {
+        path: path.resolve(__dirname, 'dist/'),
+        publicPath: '/dist/',
+        filename: 'bundle.js'
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'public/'),
+        port: 3000,
+        publicPath: 'http://localhost:3000/dist/',
+        hotOnly: true
+    },
+    plugins: [new webpack.HotModuleReplacementPlugin()]
+};  
