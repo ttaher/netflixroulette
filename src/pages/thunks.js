@@ -12,22 +12,22 @@ export const loadMovies = () => async (dispatch, getState) => {
     try {
 
         dispatch(loadMoviesInProgress());
-        const response = await fetch('http://localhost:4000/movies');
+        const response = await fetch('http://localhost:4000/movies?offset=0&limit=20');
         const result = await response.json();
-        debugger;
+
         dispatch(loadMoviesSuccess(result.data));
     } catch (e) {
         dispatch(loadMoviesFailure());
         dispatch(displayAlert(e));
     }
 }
-export const loadMovieDetail = movie => async (dispatch, getState) => {
+export const loadMovieDetail = movie => async dispatch => {
     try {
-        dispatch(loadMoviesInProgress());
-        const response = await fetch($`http://localhost:4000/movies/{movie.id}`);
-        const movie = await response.json();
-        
-        dispatch(loadMovieDetailSuccess(movie));
+
+        const response = await fetch('http://localhost:4000/movies/' + movie.id);
+        const movieresult = await response.json();
+
+        dispatch(loadMovieDetailSuccess(movieresult));
     } catch (e) {
         dispatch(displayAlert(e));
     }
@@ -49,7 +49,6 @@ export const editSelectedMovie = movie => async dispatch => {
 }
 export const deleteSelectedMovie = movie => async dispatch => {
     try {
-        debugger;
         fetch('http://localhost:4000/movies/' + movie.id, {
             method: 'DELETE',
         }).then(res => dispatch(deleteMovie(movie)));

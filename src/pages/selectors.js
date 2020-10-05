@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 export const getMovies = state => state.movies.data;
-export const getMovieDetails = state => state.movie.movieDetails;
+export const getMovieDetails = state => state.movies.movieDetails;
 export const getMoviesLoading = state => state.movies.isLoading;
 
 export const getMoviesList = createSelector(

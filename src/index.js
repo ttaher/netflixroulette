@@ -8,15 +8,15 @@ import App from './App.js';
 import HomePage from './pages/HomePage';
 import './resources/index.css';
 const store = configureStore();
-const persistor = persistStore(store);
+//const persistor = persistStore(store);
 
 ReactDOM.render(
     <Provider store={store}>
-        <PersistGate
+        {/* <PersistGate
             loading={<div>Loading...</div>}
-            persistor={persistor}>
-            <HomePage />
-        </PersistGate>
+            persistor={persistor}> */}
+        <HomePage />
+        {/* </PersistGate> */}
     </Provider>
     ,
     document.getElementById('root'),

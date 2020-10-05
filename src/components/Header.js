@@ -33,24 +33,27 @@ const Header = ({ movieDetails, loadMovieDetails: { }, onHideDetailsPressed }) =
         </div>
     </header>
     return (
-        (movieDetails == undefined || movieDetails == null || movieDetails.length == 0) ? header :
-            <header name="header" style={{ backgroundImage: `url(${movieDetails[0].movieImgUrl})` }} className="header">
+        (movieDetails == undefined || movieDetails == null) ? header :
+            <header name="header" style={{ backgroundImage: `url(${movieDetails.poster_path})` }} className="header">
                 <div className="row">
                     <button type="button" className="headerAddMovie">
                         X
                 </button>
                     <label className="headerTitle">
-                        {movieDetails[0].movieName}
+                        {movieDetails.title}
                     </label>
-                    <h3>{movieDetails[0].movieYear}</h3>
+                    <h3>{movieDetails.release_date}</h3>
                 </div>
             </header>
     )
 
 }
-const mapStateToProps = state => ({
-    movieDetails: getMovieDetails(state)
-});
+const mapStateToProps = state => {
+    
+    return ({
+        movieDetails: state.movies.movieDetails
+    })
+};
 
 const mapDispatchToProps = dispatch => ({
     loadMovieDetails: movie => dispatch(loadMovieDetail(movie)),

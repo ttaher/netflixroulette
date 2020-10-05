@@ -30,20 +30,20 @@ export const movies = (state = initialState, action) => {
         }
         case DELETE_MOVIE: {
             const movieToDelete = payload;
-            debugger;
+            
             var result = {
                 ...state,
                 data: state.data.filter(movie => movie.id !== movieToDelete.id),
             };
-            debugger
-            return result;
+                        return result;
         }
         case LOAD_MOVIE_DETAIL: {
-            const { movie } = payload;
+            
+            const movie = payload;
             return {
                 ...state,
                 isLoading: false,
-                data: movie
+                movieDetails: movie
             };
         }
         case LOAD_MOVIES_SUCCESS: {
