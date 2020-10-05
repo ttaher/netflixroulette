@@ -8,9 +8,7 @@ import { loadMovies, deleteSelectedMovie, editSelectedMovie, loadMovieDetail }
     from '../pages/thunks';
 import MovieTemplate from './MovieTemplate';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-const Searchresult = ({ MoviesList, isLoading, startLoadingMovies }) => {
-    debugger;
-    const movies = MoviesList.movies;
+const Searchresult = ({ movies, isLoading, startLoadingMovies }) => {
     useEffect(() => {
         startLoadingMovies()
     }, []);
@@ -64,7 +62,7 @@ const Searchresult = ({ MoviesList, isLoading, startLoadingMovies }) => {
 
 const mapStateToProps = state => ({
     isLoading: getMoviesLoading(state),
-    MoviesList: getMovies(state)
+    movies: getMovies(state)
 });
 
 const mapDispatchToProps = dispatch => ({

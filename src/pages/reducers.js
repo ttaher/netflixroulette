@@ -29,7 +29,7 @@ export const movies = (state = initialState, action) => {
             };
         }
         case DELETE_MOVIE: {
-            const { movie: movieToDelete } = payload;
+            const movieToDelete = payload;
             debugger;
             var result = {
                 ...state,

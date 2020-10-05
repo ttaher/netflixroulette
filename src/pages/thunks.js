@@ -23,7 +23,7 @@ export const loadMovies = () => async (dispatch, getState) => {
 }
 export const loadMovieDetail = movie => async (dispatch, getState) => {
     try {
-        //dispatch(loadMoviesInProgress());
+        dispatch(loadMoviesInProgress());
         const response = await fetch($`http://localhost:4000/movies/{movie.id}`);
         const movie = await response.json();
         
