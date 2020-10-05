@@ -9,6 +9,8 @@ import { loadMovies, deleteSelectedMovie, editSelectedMovie, loadMovieDetail }
 import MovieTemplate from './MovieTemplate';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 const Searchresult = ({ MoviesList, isLoading, startLoadingMovies }) => {
+    debugger;
+    const movies = MoviesList.movies;
     useEffect(() => {
         startLoadingMovies()
     }, []);
@@ -47,12 +49,13 @@ const Searchresult = ({ MoviesList, isLoading, startLoadingMovies }) => {
 
             <div className="container">
                 <div className="row" name="resultcount">
-                    {MoviesList.length} movie found
+                    {movies.length} movie found
                 </div>
                 <div className='row' >
-                    {MoviesList.map(movie =>
-                        <MovieTemplate key={movie.id} movie={movie} ></MovieTemplate>
-                    )}
+                    {
+                        movies.map(movie =>
+                            <MovieTemplate key={movie.id} movie={movie} ></MovieTemplate>
+                        )}
                 </div>
             </div>
         </div>

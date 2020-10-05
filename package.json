@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx webpack-dev-server --mode development",
-    "build": "npx webpack --mode development",
+    "dev": "npx webpack-dev-server --watch --mode development",
+    "build": "npx webpack --watch --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,6 +23,7 @@
     "chai": "^4.2.0",
     "css-loader": "^3.5.3",
     "fetch-mock": "^9.10.1",
+    "formik": "^2.1.7",
     "jest": "^26.2.2",
     "jquery": "^3.5.1",
     "mocha": "^8.0.1",

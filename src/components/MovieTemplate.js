@@ -9,16 +9,16 @@ import { editSelectedMovie, deleteSelectedMovie, loadMovieDetail } from '../page
 const MovieTemplate = ({ movie, editMoviePressed, deleteMoviePressed, onMovieClicked }) => {
     const [movieControlMenu, setmovieControlMenu] = useState(false);
     return (
-        <a id={movie.id} className="col-4" onClick={() => onMovieClicked(movie)} >
+        <a id={movie.id} className="col-4"  >
             <div className="b5fwa0m2 pmk7jnqg plgsh5y4 edit-content">
-                <button onClick={() => setmovieControlMenu(!movieControlMenu)} >...</button>
+                <button  id="movie-menu" onClick={() => setmovieControlMenu(!movieControlMenu)} >...</button>
                 {
                     movieControlMenu ?
                         <div >
                             <button onClick={() => setmovieControlMenu(!movieControlMenu)}>close me</button>
                             <button onClick={() => editMoviePressed(movie)}>Edit</button>
                             <button onClick={() => {
-                                const confirmMessage = `Are you sure you want to delete this movie?  ${movie.movieName}`;
+                                const confirmMessage = `Are you sure you want to delete this movie?  ${movie.title}`;
                                 confirmAlert({
                                     title: 'Delete MOVIE',
                                     message: confirmMessage,
@@ -36,14 +36,14 @@ const MovieTemplate = ({ movie, editMoviePressed, deleteMoviePressed, onMovieCli
                 }
             </div>
             <div>
-                <div className="row">
+                <div className="row" onClick={() => onMovieClicked(movie)}>
                     <div  >
-                        <img className="col" src={movie.movieImgUrl} alt="" />
+                        <img className="col" src={movie.poster_path} alt="" />
                         <div className="float-left">
-                            {movie.movieName}
+                            {movie.title}
                         </div>
                         <div className="float-right">
-                            {movie.movieYear}
+                            {movie.release_date}
                         </div>
                     </div>
                 </div>
