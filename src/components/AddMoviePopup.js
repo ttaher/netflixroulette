@@ -1,91 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import '../resources/AddMoviePopup.css';
-class AddMoviePopup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: "",
-            releaseDate: null,
-            movieUrl: "",
-            movieGenre: "",
-            movieOverview: "",
-            movieRuntime: ""
-        };
-        this.AddNewMovie = this.AddNewMovie.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+import { editSelectedMovie } from '../pages/thunks';
+
+const AddMoviePopup = ({ movie = {}, closePopup, editMoviePressed }) => {
+    let formAction = "";
+    if (movie.id == undefined) {
+        formAction = "Create New Movie";
+    } else {
+        formAction = "Edit Movie";
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.name === 'isGoing' ? target.checked : target.value;
-        const name = target.name;
+    const [id, setid] = useState(movie && movie.id ? movie.id : "");
+    const [title, settitle] = useState(movie && movie.title ? movie.title : "");
+    const [release_date, setrelease_date] = useState(movie && movie.release_date ? movie.release_date : "");
+    const [poster_path, setposter_path] = useState(movie && movie.poster_path ? movie.poster_path : "");
+    const [overview, setoverview] = useState(movie && movie.overview ? movie.overview : "");
+    const [genres, setgenres] = useState(movie && movie.genres ? movie.genres : "");
+    const [runtime, setruntime] = useState(movie && movie.runtime ? movie.runtime : "");
 
-        this.setState({
-            [name]: value
-        });
+    function postData(event) {
+
+        debugger;
+        let editedMovie = {
+            id: id,
+            title: title,
+            release_date: release_date,
+            poster_path: poster_path,
+            overview: overview,
+            genres: genres,
+            runtime: runtime
+        }
+        editMoviePressed(editedMovie);
+        closePopup();
     }
 
-    AddNewMovie(event) {
-        event.preventDefault()
-        console.log(this.state.title);
-        console.log(this.state.releaseDate);
-        console.log(this.state.movieUrl);
-        console.log(this.state.movieGenre);
-        console.log(this.state.movieOverview);
-        console.log(this.state.movieRuntime);
-        this.props.closePopup();
-    }
+    return (
+        <div className='popup'>
+            <div className='popup_inner'>
+                <h1>{formAction}</h1>
+                <button onClick={closePopup}>close me</button>
+                <form onSubmit={postData}>
+                    <div className="row">
+                        <h3 className="form-input-title">TITLE</h3>
+                        <br />
+                        <input type="hidden" value={id}></input>
+                        <input id="title" type="text" name="title" placeholder="movie title" value={title}
+                            onChange={e => settitle(e.target.value)}></input>
+                    </div>
+                    <div className="row">
+                        <h3 className="form-input-title"> RELEASE DATE</h3>
+                        <br />
+                        <input id="release_date" type="date" name="release_date" placeholder="movie realse date" value={release_date} onChange={e => setrelease_date(e.target.value)}></input>
+                    </div>
 
-    render() {
-        return (
-            <div className='popup'>
-                <div className='popup_inner'>
-                    <h1>{this.props.text}</h1>
-                    <button onClick={this.props.closePopup}>close me</button>
-                    <form onSubmit={this.AddNewMovie}>
-                        <div className="row">
-                            <h3 className="form-input-title">TITLE</h3>
-                            <br />
-                            <input id="title" type="text" name="title" placeholder="movie title" value={this.state.title} onChange={this.handleInputChange}></input>
-                        </div>
-                        <div className="row">
-                            <h3 className="form-input-title"> RELEASE DATE</h3>
-                            <br />
-                            <input id="releaseDate" type="date" name="releaseDate" placeholder="movie realse date" value={this.state.releaseDate} onChange={this.handleInputChange}></input>
-                        </div>
+                    <div className="row">
+                        <h3 className="form-input-title">MOVIE URL</h3>
+                        <br />
+                        <input name="poster_path" type="text" placeholder="movie url" value={poster_path} onChange={e => setposter_path(e.target.value)}></input>
+                    </div>
+                    <div className="row">
+                        <h3 className="form-input-title">GENRE</h3>
+                        <br />
+                        <select id="genres" type="text" multiple={true} name="genres" value={genres} onChange={e => setgenres(e.target.value)}>
+                            <option value="0">select genre</option>
+                            <option value="lime">Lime</option>
+                            <option value="coconut">Coconut</option>
+                            <option value="mango">Mango</option>
+                        </select>
+                    </div>
 
-                        <div className="row">
-                            <h3 className="form-input-title">MOVIE URL</h3>
-                            <br />
-                            <input name="movieUrl" type="text" placeholder="movie url" value={this.state.movieUrl} onChange={this.handleInputChange}></input>
-                        </div>
-                        <div className="row">
-                            <h3 className="form-input-title">GENRE</h3>
-                            <br />
-                            <select id="movieGenre" type="text" name="movieGenre" value={this.state.movieGenre} onChange={this.handleInputChange}>
-                                <option value="0">select genre</option>
-                                <option value="lime">Lime</option>
-                                <option value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                            </select>
-                        </div>
+                    <div className="row">
+                        <h3 className="form-input-title">OVERVIEW</h3>
+                        <br />
+                        <input id="overview" type="text" name="overview" placeholder="movie overview" value={overview} onChange={e => setoverview(e.target.value)}></input>
+                    </div>
+                    <div className="row">
+                        <h3 className="form-input-title">RUNTIME</h3>
+                        <br />
+                        <input id="runtime" type="text" name="runtime" placeholder="movie runtime" value={runtime} onChange={e => setruntime(e.target.value)}></input>
+                    </div>
 
-                        <div className="row">
-                            <h3 className="form-input-title">OVERVIEW</h3>
-                            <br />
-                            <input id="movieOverview" type="text" name="movieOverview" placeholder="movie overview" value={this.state.movieOverview} onChange={this.handleInputChange}></input>
-                        </div>
-                        <div className="row">
-                            <h3 className="form-input-title">RUNTIME</h3>
-                            <br />
-                            <input id="movieRuntime" type="text" name="movieRuntime" placeholder="movie runtime" value={this.state.movieRuntime} onChange={this.handleInputChange}></input>
-                        </div>
-
-                        <button type="submit" >Submit</button>
-                    </form>
-                </div>
+                    <button type="submit" >Submit</button>
+                </form>
             </div>
-        );
-    }
+        </div >
+    );
+
 }
-export default AddMoviePopup;
+
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+    editMoviePressed: movie => dispatch(editSelectedMovie(movie)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMoviePopup);

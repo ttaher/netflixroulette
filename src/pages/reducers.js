@@ -22,7 +22,7 @@ export const movies = (state = initialState, action) => {
             };
         }
         case EDIT_MOVIE: {
-            const { movie: movieToEdit } = payload;
+            const { movie } = payload;
             return {
                 ...state,
                 data: state.data,

@@ -35,14 +35,25 @@ export const loadMovieDetail = movie => async dispatch => {
 
 export const addNewMovie = movie => async dispatch => {
     try {
-        dispatch(addMovie(movie));
+        fetch('http://localhost:4000/movies/', {
+            method: 'POST',
+            body: movie
+        }).then(res => dispatch(addMovie(movie)));
+
     } catch (e) {
         dispatch(displayAlert(e));
     }
 }
 export const editSelectedMovie = movie => async dispatch => {
     try {
-        dispatch(editMovie(movie));
+        debugger;
+        let bo =JSON.stringify(movie);
+        debugger;
+        fetch('http://localhost:4000/movies/', {
+            method: 'PUT',
+            body: bo
+        }).then(res => dispatch(editMovie(movie)));
+
     } catch (e) {
         dispatch(displayAlert(e));
     }
