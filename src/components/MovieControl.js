@@ -3,8 +3,6 @@ import '../resources/AddMoviePopup.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 const MovieControl = ({ movie, closemenu }) => {
-
-
     return (
         <div >
             <div >

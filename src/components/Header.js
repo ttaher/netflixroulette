@@ -4,11 +4,10 @@ import SearchHeader from './SearchHeader';
 import '../resources/header.module.css';
 import ErrorBoundary from './ErrorBoundary';
 import AddMoviePopup from './AddMoviePopup';
-import { getMovieDetails } from '../pages/selectors';
-import { loadMovieDetail, hideDetails } from '../pages/thunks';
+import { loadMovieDetail } from '../pages/thunks';
 
 
-const Header = ({ movieDetails, loadMovieDetails: { }, onHideDetailsPressed }) => {
+const Header = ({ movieDetails, loadMovieDetails: { } }) => {
     const [showAddPopup, setShowAddPopup] = useState(false);
     const header = <header name="header" className="header">
         <div className="row">
@@ -49,7 +48,7 @@ const Header = ({ movieDetails, loadMovieDetails: { }, onHideDetailsPressed }) =
 
 }
 const mapStateToProps = state => {
-    
+
     return ({
         movieDetails: state.movies.movieDetails
     })

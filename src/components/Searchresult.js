@@ -4,7 +4,7 @@ import '../resources/searchresult.module.css'
 import '../resources/header.module.css';
 import { getMovies, getMoviesLoading }
     from '../pages/selectors';
-import { loadMovies, deleteSelectedMovie, editSelectedMovie, loadMovieDetail }
+import { loadMovies }
     from '../pages/thunks';
 import MovieTemplate from './MovieTemplate';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';

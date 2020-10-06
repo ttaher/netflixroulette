@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import '../resources/AddMoviePopup.css';
 import { editSelectedMovie } from '../pages/thunks';
@@ -20,7 +20,6 @@ const AddMoviePopup = ({ movie = {}, closePopup, editMoviePressed }) => {
         if (!values.release_date) {
             errors.release_date = 'Required';
         }
-
         return errors;
     };
     const formik = useFormik({
@@ -40,33 +39,11 @@ const AddMoviePopup = ({ movie = {}, closePopup, editMoviePressed }) => {
         },
         validate,
         onSubmit: values => {
-            debugger
             alert(JSON.stringify(values, null, 2));
-            let editedMovie = {
-                id: id,
-                title: title,
-                release_date: release_date,
-                poster_path: poster_path,
-                overview: overview,
-                genres: genres,
-                runtime: runtime
-            };
             editMoviePressed(values);
             closePopup();
         },
     });
-    //const [id, setid] = useState(movie && movie.id ? movie.id : "");
-    const [title, settitle] = useState(movie && movie.title ? movie.title : "");
-    const [release_date, setrelease_date] = useState(movie && movie.release_date ? movie.release_date : "");
-    const [poster_path, setposter_path] = useState(movie && movie.poster_path ? movie.poster_path : "");
-    const [overview, setoverview] = useState(movie && movie.overview ? movie.overview : "");
-    const [genres, setgenres] = useState(movie && movie.genres ? movie.genres : "");
-    const [runtime, setruntime] = useState(movie && movie.runtime ? movie.runtime : "");
-
-    function postData(event) {
-        editMoviePressed(editedMovie);
-        closePopup();
-    }
 
     return (
         <div className='popup'>
