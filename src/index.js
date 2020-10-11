@@ -6,13 +6,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from './store';
 import './resources/index.css';
 const store = configureStore();
-import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch
-} from 'react-router-dom';
+import App from './App';
 //const persistor = persistStore(store);
 
 render(
@@ -20,15 +14,7 @@ render(
         {/* <PersistGate
             loading={<div>Loading...</div>}
             persistor={persistor}> */}
-        <Router>
-            <div className="App">
-                {/* <NavBar /> */}
-                <Switch>
-                    <Route path="" component={HomePage} exact />
-                    <Route component={NotFoundPage} />
-                </Switch>
-            </div>
-        </Router>
+        <App />
         {/* </PersistGate> */}
     </Provider>
     ,

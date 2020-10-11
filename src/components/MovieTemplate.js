@@ -5,11 +5,12 @@ import AddMoviePopup from '../components/AddMoviePopup';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { deleteSelectedMovie, loadMovieDetail } from '../pages/thunks';
+import { Link } from 'react-router-dom';
 const MovieTemplate = ({ movie, deleteMoviePressed, onMovieClicked }) => {
     const [movieControlMenu, setmovieControlMenu] = useState(false);
     const [showAddPopup, setShowAddPopup] = useState();
     return (
-        <a id={movie.id} className="col-4"  >
+        <Link key={movie.id} to={`/movie/${movie.id}`} className="col-4">
             <div className="b5fwa0m2 pmk7jnqg plgsh5y4 edit-content">
                 <button id="movie-menu" onClick={() => setmovieControlMenu(!movieControlMenu)} >...</button>
                 {
@@ -58,7 +59,8 @@ const MovieTemplate = ({ movie, deleteMoviePressed, onMovieClicked }) => {
                     </div>
                 </div>
             </div>
-        </a >
+        </Link>
+
     )
 }
 
