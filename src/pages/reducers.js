@@ -12,7 +12,6 @@ const initialState = { isLoading: false, data: [], movieDetails: null };
 
 export const movies = (state = initialState, action) => {
     const { type, payload } = action;
-
     switch (type) {
         case ADD_MOVIE: {
             const { movie } = payload;
@@ -30,15 +29,13 @@ export const movies = (state = initialState, action) => {
         }
         case DELETE_MOVIE: {
             const movieToDelete = payload;
-            
             var result = {
                 ...state,
                 data: state.data.filter(movie => movie.id !== movieToDelete.id),
             };
-                        return result;
+            return result;
         }
         case LOAD_MOVIE_DETAIL: {
-            
             const movie = payload;
             return {
                 ...state,
